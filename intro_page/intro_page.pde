@@ -12,7 +12,7 @@ int display;
 //level 3=3, level 6=6, level 9=9
 int level=3;
 //cards, ie={1,1,2,2,3,3}
-int [] game;
+int [] cards;
 //total tiles
 int totaltiles;
 //flippinggg
@@ -115,20 +115,20 @@ void mouseClicked(){
   if(display==2){
      if(overeasy()==true){
       level=3;
-      int [] game={1,1,2,2,3,3};
-      StartGame(level,game);
+      int [] cards={1,1,2,2,3,3};
+      StartGame(level,cards);
       }
       else if(overmedium()==true)
       {
       level=6;
-      int [] game={1,1,2,2,3,3,4,4,5,5,6,6};
-      StartGame(level,game);
+      int [] cards={1,1,2,2,3,3,4,4,5,5,6,6};
+      StartGame(level,cards);
       }
       // Hard
       else if(overhard()==true){
       level=8;
-      int [] game={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9};
-      StartGame(level,game);
+      int [] cards={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
+      StartGame(level,cards);
       }
       else if(overend()==true){
       display =0;
@@ -167,7 +167,7 @@ void side_page(){
 //}
 
 
-void StartGame(int level,int [] game){
+void StartGame(int level,int []cards){
   totaltiles=level*2;
   int col;
   int row;
@@ -185,8 +185,8 @@ void StartGame(int level,int [] game){
     
   int [][] pos = new int [totaltiles][2];
   boolean [] isMouseHover = new boolean [totaltiles];
-  shuffCards(game);
-  for (int i=0; i<game.length; i++){
+  shuffCards(cards);
+  for (int i=0; i<cards.length; i++){
     rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
     println(pos[i][0]);
   }
