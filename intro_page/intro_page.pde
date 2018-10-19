@@ -126,7 +126,7 @@ void mouseClicked(){
       }
       // Hard
       else if(overhard()==true){
-      level=9;
+      level=8;
       int [] game={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9};
       StartGame(level,game);
       }
@@ -168,8 +168,17 @@ void side_page(){
 
 
 void StartGame(int level,int [] game){
-  
   totaltiles=level*2;
+  int col;
+  int row;
+  if(level==3){
+    col=3;
+    row=2;
+  }else if(level==6){
+    col=4;
+    row=3;
+  }else if(level
+    
   int [][] pos = new int [totaltiles][2];
   boolean [] isMouseHover = new boolean [totaltiles];
   shuffCards(game);
