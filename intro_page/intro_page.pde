@@ -78,8 +78,16 @@ void draw() {
         rectMode(CORNER);
         rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
         println(i,j);
+        
       }
     }
+    
+    
+    
+    
+    
+    
+    
     
     println ("Here is display= 3");
    }
@@ -143,6 +151,7 @@ void mouseClicked(){
       level=3;
       int [] cards={1,1,2,2,3,3};
       StartGame(level,cards);
+      
       }
       else if(overmedium()==true)
       {
@@ -159,6 +168,15 @@ void mouseClicked(){
       else if(overend()==true){
       display =0;
       } 
+      for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+      if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+          println("walaaaaa");
+        }
+      }
+    }
       
   }
 }
