@@ -3,7 +3,7 @@ PImage img2;
 PImage img3;
 PImage img4;
 
-PImage [] tiles= new PImage [9];
+PImage [] tiles= new PImage [8];
 
 String s = "The players will be allowed to flip over 2 Mahjong tiles at any moment. Tiles will be cleared when two of the same are flipped. Players will win by completing all matches.";
 
@@ -144,7 +144,7 @@ void mouseClicked(){
 
 // Define side page
 void side_page(){  
-  String[] text_name = {"Simple","Medium","Difficult","QUIT"};
+  String[] text_name = {"Simple","Medium","Difficult","Back"};
   for (int i = 0; i< 4; i++){
     image(img4, width/20, buttonY+(button_height+buttonY_move)*i, width*3/20, button_height);
     fill(68,40,3);
@@ -174,29 +174,40 @@ void StartGame(int level,int []cards){
   if(level == 3){
     col=3;
     row=2;
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        println(i,j);
+      }
+      
+    }
   }else if(level == 6){
     col=4;
     row=3;
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        println(i,j);
+      }
+      
+    }
   }else if(level == 8)
   {
     col=4;
     row=4;
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        println(i,j);
+      }
+      
+    }
   }
     
-  int [][] pos = new int [totaltiles][2];
-  boolean [] isMouseHover = new boolean [totaltiles];
   shuffCards(cards);
-  for (int i=0; i<cards.length; i++){
-    rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
-    println(pos[i][0]);
-  }
-  //Level 已知 
-    for(int i= 0;i< totaltiles;i++){
-      if(isMouseHover[i]==true){
-        flip[i]=true;
-        count++;
-        image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
-      }
-    }
-   
+
+
 }
