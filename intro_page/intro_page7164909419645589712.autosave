@@ -126,7 +126,7 @@ void mouseClicked(){
       }
       // Hard
       else if(overhard()==true){
-      level=8;
+      level=9;
       int [] game={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9};
       StartGame(level,game);
       }
@@ -169,34 +169,30 @@ void side_page(){
 
 void StartGame(int level,int [] game){
   totaltiles=level*2;
-  int col;
-  int row;
-  if(level == 3){
-    col=3;
-    row=2;
-  }else if(level == 6){
-    col=4;
-    row=3;
-  }else if(level == 8)
-  {
-    col=4;
-    row=4;
-  }
-    
   int [][] pos = new int [totaltiles][2];
   boolean [] isMouseHover = new boolean [totaltiles];
   shuffCards(game);
+  
+  //Give X,Y
+  for (int i=0; i<game.length;i++)
+  {
+    for (int j =0; j<2;j++)
+    {
+      if ()
+    }
+  }
+  
   for (int i=0; i<game.length; i++){
     rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
     println(pos[i][0]);
   }
   //Level 已知 
-    for(int i= 0;i< totaltiles;i++){
+  for(int i= 0;i< totaltiles;i++){
       if(isMouseHover[i]==true){
         flip[i]=true;
         count++;
         image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
       }
-    }
+  }
    
 }
