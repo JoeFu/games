@@ -18,9 +18,10 @@ int totaltiles;
 //flippinggg
 boolean [] flip=new boolean [totaltiles];
 //position of cards
-int [][] pos=new int [totaltiles][2];
-//overcard
-boolean [] overcard=new boolean [totaltiles];
+
+
+
+
 //counting invalid flips
 int count=0;
 //size of cards
@@ -64,7 +65,7 @@ void draw() {
     image(img1,0,0, width, height);
     display_HOW_window();
   }
-  //Display = 2, Start
+  //Display = 2, Play
   else if (display==2){
     clear();
     image(img2,0,0, width/4, height);
@@ -80,22 +81,15 @@ void draw() {
     //}
     println ("Here is display= 3");
     }
+    
     //Display = 4, Level is Medium
     else if (display==4) {
-    //level=3;
-    //startGame(level);
-    //for(int i=0;i<pos.length;i++){
-    //  for(int j=0;j<pos[i].length;j++){
-    //}
+
     println ("Here is display= 4");
     }
     //Display = 4, Level is hard
     else if (display==5) {
-    //level=3;
-    //startGame(level);
-    //for(int i=0;i<pos.length;i++){
-    //  for(int j=0;j<pos[i].length;j++){
-    //}
+    
     println ("Here is display= 5");
     }
 }
@@ -116,36 +110,65 @@ void mouseClicked(){
       display=0;   
     }
   }
-  ////clicks on display 2
-  //if(diaplay==2){
-  //}
-  //  if(mouseX
-    
-  //if(display==2
-
-  
-  
-  if(overeasy()==true){
-    level=3;
-    totaltiles=level*2;
-  }else if(overmedium()==true){
-    level=6;
-  }else if(overhard()==true){
-    level=9;
-  }else if(overend()==true){
-    display =0;
-  }
-  for(int i=0;i<pos.length;i++){
-    //for(int j=0;j<pos[i].length;j++){
-      if(overcard[i]==true){
+  //clicks on display 2
+  if(display==2){
+     if(overeasy()==true){
+      level=3;
+      totaltiles=level*2;
+      int [][] pos = new int [totaltiles][2];
+      boolean [] isMouseHover = new boolean [totaltiles];
+      int [] game={1,1,2,2,3,3};
+      shuffCards(game);
+        for (int i=0; i<game.length; i++){
+          rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
+          println(pos[i][0]);
+        }
+      }
+      else if(overmedium()==true)
+      {
+      level=6;
+      totaltiles=level*2;
+      int [][] pos=new int [totaltiles][2];
+      //overcard
+      boolean [] isMouseHover = new boolean [totaltiles];
+      int [] game={1,1,2,2,3,3,4,4,5,5,6,6};
+      shuffCards(game);
+      for (int i=0; i<game.length; i++){
+      rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
+      println(pos[i][0]);
+      }
+      }
+      // Hard
+      else if(overhard()==true){
+      level=9;
+      totaltiles=level*2;
+      int [][] pos=new int [totaltiles][2];
+      //overcard
+      boolean [] isMouseHover = new boolean [totaltiles];
+      int [] game={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9};
+      shuffCards(game);
+      for (int i=0; i<game.length; i++){
+      rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
+      println(pos[i][0]);}
+      }
+      else if(overend()==true){
+      display =0;
+      } 
+      
+    //Level 已知 
+    for(int i= 0;i< totaltiles;i++){
+      if(isMouseHover[i]==true){
         flip[i]=true;
         count++;
-        
         image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
       }
- 
+    }
   }
-}
+  
+  
+ 
+  
+ }
 
 
 // Define side page
@@ -157,5 +180,17 @@ void side_page(){
     textAlign(CENTER,CENTER);
     textSize(22);
     text(text_name[i],width/8,buttonY+button_height/2+(button_height+buttonY_move)*i);
+  }
+}
+
+void overCard(){
+  for(int i=0; i<totaltiles;i++){
+    for(int j=0;j<pos[i].length;j++){
+      if(mouseX<pos[i][0]+widthoftile && mouseX>pos[i][0] && mouseY<pos[i][1]+heightoftiles && mouseY>pos[i][1]){
+        overcard[i]=true;
+      }else{
+        overcard[i]=false;
+      }
+    }
   }
 }
