@@ -96,6 +96,7 @@ void draw() {
 
 
 void mouseClicked(){
+  
   //clicks on display 0
   if(display==0){
     if(mouseX>(width/2-width/8-width/12) && mouseX<(width/2-width/8+width/12) && mouseY>(height/2+height/4-height/16) && mouseY<(height/2+height/4+height/16)){
@@ -114,55 +115,25 @@ void mouseClicked(){
   if(display==2){
      if(overeasy()==true){
       level=3;
-      totaltiles=level*2;
-      int [][] pos = new int [totaltiles][2];
-      boolean [] isMouseHover = new boolean [totaltiles];
       int [] game={1,1,2,2,3,3};
-      shuffCards(game);
-        for (int i=0; i<game.length; i++){
-          rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
-          println(pos[i][0]);
-        }
+      StartGame(level,game);
       }
       else if(overmedium()==true)
       {
       level=6;
-      totaltiles=level*2;
-      int [][] pos=new int [totaltiles][2];
-      //overcard
-      boolean [] isMouseHover = new boolean [totaltiles];
       int [] game={1,1,2,2,3,3,4,4,5,5,6,6};
-      shuffCards(game);
-      for (int i=0; i<game.length; i++){
-      rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
-      println(pos[i][0]);
-      }
+      StartGame(level,game);
       }
       // Hard
       else if(overhard()==true){
       level=9;
-      totaltiles=level*2;
-      int [][] pos=new int [totaltiles][2];
-      //overcard
-      boolean [] isMouseHover = new boolean [totaltiles];
       int [] game={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9};
-      shuffCards(game);
-      for (int i=0; i<game.length; i++){
-      rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
-      println(pos[i][0]);}
+      StartGame(level,game);
       }
       else if(overend()==true){
       display =0;
       } 
       
-    //Level 已知 
-    for(int i= 0;i< totaltiles;i++){
-      if(isMouseHover[i]==true){
-        flip[i]=true;
-        count++;
-        image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
-      }
-    }
   }
   
   
@@ -183,14 +154,36 @@ void side_page(){
   }
 }
 
-void overCard(){
-  for(int i=0; i<totaltiles;i++){
-    for(int j=0;j<pos[i].length;j++){
-      if(mouseX<pos[i][0]+widthoftile && mouseX>pos[i][0] && mouseY<pos[i][1]+heightoftiles && mouseY>pos[i][1]){
-        overcard[i]=true;
-      }else{
-        overcard[i]=false;
+//void overCard(){
+//  for(int i=0; i<totaltiles;i++){
+//    for(int j=0;j<pos[i].length;j++){
+//      if(mouseX<pos[i][0]+widthoftile && mouseX>pos[i][0] && mouseY<pos[i][1]+heightoftiles && mouseY>pos[i][1]){
+//        overcard[i]=true;
+//      }else{
+//        overcard[i]=false;
+//      }
+//    }
+//  }
+//}
+
+
+void StartGame(int level,int [] game){
+  
+  totaltiles=level*2;
+  int [][] pos = new int [totaltiles][2];
+  boolean [] isMouseHover = new boolean [totaltiles];
+  shuffCards(game);
+  for (int i=0; i<game.length; i++){
+    rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
+    println(pos[i][0]);
+  }
+  //Level 已知 
+    for(int i= 0;i< totaltiles;i++){
+      if(isMouseHover[i]==true){
+        flip[i]=true;
+        count++;
+        image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
       }
     }
-  }
+   
 }
