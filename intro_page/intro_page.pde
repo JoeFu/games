@@ -10,11 +10,11 @@ int display;
 //level 3=3, level 6=6, level 9=9
 int level=3;
 //cards, ie={1,1,2,2,3,3}
-int [] cards;
+int [][] card_status;
 //total tiles
 int totaltiles;
 //flippinggg
-boolean [] flip=new boolean [totaltiles];
+//boolean [] flip=new boolean [totaltiles];
 int count=0;
 //size of cards
 int widthoftile=45;
@@ -25,6 +25,7 @@ float buttonY_move;
 
 int row;
 int col;
+int [] crad_show;
 
 void setup(){
   size(800,600);
@@ -35,12 +36,10 @@ void setup(){
   buttonY = height/5;
   button_height = height/9;
   buttonY_move = height/15;
-
   for(int i=0;i<tiles.length;i++){
     tiles[i]=loadImage(i+".jpg");
   }
   display = 0;
-  
 }
 
 void draw() { 
@@ -70,57 +69,107 @@ void draw() {
     image(img3,width/4,0, width, height);
     row=2;
     col=3;
+    if (card_status.length < row)
+    {
+      card_status = new int [row][col];
+      crad_show = new int [row*col];
+    }
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
-        fill(0,80,60);
-        rectMode(CORNER);
-        rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
+        //Draw Here !!!!!!!!
+        if (card_status[i][j]== 0)
+        {
+          fill(0,80,60);
+          rectMode(CORNER);
+          rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
+          println("Display =3",card_status[i][j]);
+        }
+        else if(card_status[i][j]==1)
+        {
+          fill(255,255,255);
+          rectMode(CORNER);
+          rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
+          println("Display =3",card_status[i][j]); 
+        }
+        else if (card_status[i][j]==2)
+        {
+          
+        }
         //println(i,j);
-        
       }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    //println ("Here is display= 3");
    }
     
     //Display = 4, Level is Medium
     else if (display==4) {
-      
+    row=3;
+    col=4;
     image(img3,width/4,0, width, height);
-      
+    if (card_status.length < row)
+    {
+      card_status = new int [row][col];
+    }
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
-        fill(0,80,60);
-        rectMode(CORNER);
-        rect(23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
-        println(i,j);
+        if(card_status[i][j]==0)
+        {
+          fill(0,80,60);
+          rectMode(CORNER);
+          rect(23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
+        }
+        else if (card_status[i][j]==1)
+        {
+          fill(255,255,255);
+          rectMode(CORNER);
+          rect(23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
+          println(i,j);
+        }
+        else if(card_status[i][j]==2)
+        {
+          
+        }
       }
     }
+   
        
-    println ("Here is display= 4");
+    //println ("Here is display= 4");
     }
     //Display = 4, Level is hard
     else if (display==5) {
+    row=4;
+    col=4;
     image(img3,width/4,0, width, height);
+    if (card_status.length < row)
+    {
+      card_status = new int [row][col];
+    }
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
-        fill(0,80,60);
-        rectMode(CORNER);
-        rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
-        println(i,j);
+        if (card_status[i][j]==0)
+        {
+          fill(0,80,60);
+          rectMode(CORNER);
+          rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
+          println(i,j);
+        }
+        else if (card_status[i][j]==1)
+        {
+          fill(0,0,0);
+          rectMode(CORNER);
+          rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
+          println(i,j);
+        }
+        else if (card_status[i][j]==2) {
+          
+        }
+         
       }
     }
     
@@ -149,37 +198,62 @@ void mouseClicked(){
   if(display==2||display==3||display==4||display==5){
      if(overeasy()==true){
       level=3;
-      int [] cards={1,1,2,2,3,3};
-      StartGame(level,cards);
-      
+      int [] cards_numbers= {1,1,2,2,3,3};
+      StartGame(level,cards_numbers);
       }
       else if(overmedium()==true)
       {
       level=6;
-      int [] cards={1,1,2,2,3,3,4,4,5,5,6,6};
-      StartGame(level,cards);
+      int [] cards_numbers={1,1,2,2,3,3,4,4,5,5,6,6};
+      StartGame(level,cards_numbers);
       }
       // Hard
       else if(overhard()==true){
       level=8;
-      int [] cards={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
-      StartGame(level,cards);
+      int [] cards_numbers={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
+      StartGame(level,cards_numbers);
       }
       else if(overend()==true){
       display =0;
       } 
       if(level==3){
       for (int i =0; i<row;i++)
-    {
-      for (int j =0; j<col;j++)
       {
-      if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
-          println("walaaaaa");
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            println("walaaaaa");
+            card_status[i][j]=1;
+            }
+          }
         }
       }
-    }
-      }
-      
+      // Change Here!
+      if(level==4){
+      for (int i =0; i<row;i++)
+      {
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            println("walaaaaa");
+            card_status[i][j]=1;
+            }
+          }
+        }
+      } 
+      // Change Here!
+      if(level==5){
+      for (int i =0; i<row;i++)
+      {
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            println("walaaaaa");
+            card_status[i][j]=1;
+            }
+          }
+        }
+      } 
   }
 }
 
@@ -195,51 +269,74 @@ void side_page(){
   }
 }
 
-//void overCard(){
-//  for(int i=0; i<totaltiles;i++){
-//    for(int j=0;j<pos[i].length;j++){
-//      if(mouseX<pos[i][0]+widthoftile && mouseX>pos[i][0] && mouseY<pos[i][1]+heightoftiles && mouseY>pos[i][1]){
-//        overcard[i]=true;
-//      }else{
-//        overcard[i]=false;
-//      }
-//    }
-//  }
-//}
-
 
 void StartGame (int level,int []cards){
+  
   totaltiles=level*2;
   shuffCards(cards);
   if(level == 3){
-    
     init_Card(col,row);
     display = 3;
+    card_status = new int [row][col];
+    for (int i =0; i<row;i++)
+      {
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            //println("walaaaaa");
+            card_status[i][j]=1;
+          }
+        }
+      }
+    
   }
   else if(level == 6){
-    row=3;
-    col=4;
+    //row=3;
+    //col=4;
     init_Card(col,row);
     display = 4;
+    card_status = new int [row][col];
     
+    //Change here
+    for (int i =0; i<row;i++)
+      {
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            //println("walaaaaa");
+            card_status[i][j]=1;
+          }
+        }
+      }
   }
   else if(level == 8)
   {
-    col=4;
-    row=4;
+    //col=4;
+    //row=4;
     init_Card(col,row);
     display = 5;
+    card_status = new int [row][col];
+    //Change here
+    for (int i =0; i<row;i++)
+      {
+        for (int j =0; j<col;j++)
+        {
+          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+            //println("walaaaaa");
+            card_status[i][j]=1;
+          }
+        }
+      }
   }  
 }
 
 void init_Card(int col, int row){ 
-  int [][] status = new int [row][col];
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
         //println(i,j);
-        status[i][j] =0;
+        card_status[i][j] =0;
       }  
     } 
 }
