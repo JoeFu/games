@@ -77,7 +77,7 @@ void draw() {
         fill(0,80,60);
         rectMode(CORNER);
         rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
-        println(i,j);
+        //println(i,j);
         
       }
     }
@@ -89,7 +89,7 @@ void draw() {
     
     
     
-    println ("Here is display= 3");
+    //println ("Here is display= 3");
    }
     
     //Display = 4, Level is Medium
@@ -238,7 +238,7 @@ void init_Card(int col, int row){
     {
       for (int j =0; j<col;j++)
       {
-        println(i,j);
+        //println(i,j);
         status[i][j] =0;
       }  
     } 
