@@ -102,6 +102,7 @@ void draw() {
 
 
 void mouseClicked(){
+  //clicks on display 0
   if(display==0){
     if(mouseX>(width/2-width/8-width/12) && mouseX<(width/2-width/8+width/12) && mouseY>(height/2+height/4-height/16) && mouseY<(height/2+height/4+height/16)){
       display=1;
@@ -109,11 +110,20 @@ void mouseClicked(){
       display=2;
     }
   }
+  //clicks on display 1
   if(display==1){
     if (mouseX>(width/2-width/20) && mouseX<(width/2+width/20) && mouseY>(height/2+height/4-height/30) && mouseY<(height/2+height/4+height/30)){   
       display=0;   
-    } 
+    }
   }
+  ////clicks on display 2
+  //if(diaplay==2){
+  //}
+  //  if(mouseX
+    
+  //if(display==2
+
+  
   
   if(overeasy()==true){
     level=3;
@@ -123,7 +133,7 @@ void mouseClicked(){
   }else if(overhard()==true){
     level=9;
   }else if(overend()==true){
-    exit();
+    display =0;
   }
   for(int i=0;i<pos.length;i++){
     //for(int j=0;j<pos[i].length;j++){
@@ -133,7 +143,8 @@ void mouseClicked(){
         
         image(tiles[i],pos[i][0],pos[i][1],widthoftile,heightoftile);
       }
-  } 
+ 
+  }
 }
 
 

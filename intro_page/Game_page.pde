@@ -5,6 +5,7 @@ void startGame(int x){
     shuffCards(game);
 
     for (int i=0; i<game.length; i++){
+      rect(pos[i][0],pos[i][1],widthoftile,heightoftile);
     }
   }else if(x==6){
     //6 pairs
