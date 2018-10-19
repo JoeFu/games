@@ -168,6 +168,7 @@ void mouseClicked(){
       else if(overend()==true){
       display =0;
       } 
+      if(level==3){
       for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
@@ -177,6 +178,7 @@ void mouseClicked(){
         }
       }
     }
+      }
       
   }
 }
