@@ -2,11 +2,9 @@ PImage img1;
 PImage img2;
 PImage img3;
 PImage img4;
-
 PImage [] tiles= new PImage [8];
 
 String s = "The players will be allowed to flip over 2 Mahjong tiles at any moment. Tiles will be cleared when two of the same are flipped. Players will win by completing all matches.";
-
 //display 0=intro page, display 1=how, display 2=start, display 3=easy, display 4=medium, display 5=hard
 int display;
 //level 3=3, level 6=6, level 9=9
@@ -17,12 +15,6 @@ int [] cards;
 int totaltiles;
 //flippinggg
 boolean [] flip=new boolean [totaltiles];
-//position of cards
-
-
-
-
-//counting invalid flips
 int count=0;
 //size of cards
 int widthoftile=45;
@@ -31,7 +23,8 @@ float buttonY;
 float button_height;
 float buttonY_move;
 
-
+int row;
+int col;
 
 void setup(){
   size(800,600);
@@ -42,7 +35,7 @@ void setup(){
   buttonY = height/5;
   button_height = height/9;
   buttonY_move = height/15;
-  
+
   for(int i=0;i<tiles.length;i++){
     tiles[i]=loadImage(i+".jpg");
   }
@@ -74,21 +67,54 @@ void draw() {
   } 
   //Display = 3, Level is Easy
   else if (display==3) {
-    //level=3;
-    //startGame(level);
-    //for(int i=0;i<pos.length;i++){
-    //  for(int j=0;j<pos[i].length;j++){
-    //}
-    println ("Here is display= 3");
+    image(img3,width/4,0, width, height);
+    row=2;
+    col=3;
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        fill(0,80,60);
+        rectMode(CORNER);
+        rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
+        println(i,j);
+      }
     }
+    
+    println ("Here is display= 3");
+   }
     
     //Display = 4, Level is Medium
     else if (display==4) {
-
+      
+    image(img3,width/4,0, width, height);
+      
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        fill(0,80,60);
+        rectMode(CORNER);
+        rect(23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
+        println(i,j);
+      }
+    }
+       
     println ("Here is display= 4");
     }
     //Display = 4, Level is hard
     else if (display==5) {
+    image(img3,width/4,0, width, height);
+    for (int i =0; i<row;i++)
+    {
+      for (int j =0; j<col;j++)
+      {
+        fill(0,80,60);
+        rectMode(CORNER);
+        rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
+        println(i,j);
+      }
+    }
     
     println ("Here is display= 5");
     }
@@ -112,7 +138,7 @@ void mouseClicked(){
     }
   }
   //clicks on display 2
-  if(display==2){
+  if(display==2||display==3||display==4||display==5){
      if(overeasy()==true){
       level=3;
       int [] cards={1,1,2,2,3,3};
@@ -135,12 +161,7 @@ void mouseClicked(){
       } 
       
   }
-  
-  
- 
-  
- }
-
+}
 
 // Define side page
 void side_page(){  
@@ -167,47 +188,38 @@ void side_page(){
 //}
 
 
-void StartGame(int level,int []cards){
+void StartGame (int level,int []cards){
   totaltiles=level*2;
-  int col;
-  int row;
+  shuffCards(cards);
   if(level == 3){
-    col=3;
-    row=2;
-    for (int i =0; i<row;i++)
-    {
-      for (int j =0; j<col;j++)
-      {
-        println(i,j);
-      }
-      
-    }
-  }else if(level == 6){
-    col=4;
+    
+    init_Card(col,row);
+    display = 3;
+  }
+  else if(level == 6){
     row=3;
-    for (int i =0; i<row;i++)
-    {
-      for (int j =0; j<col;j++)
-      {
-        println(i,j);
-      }
-      
-    }
-  }else if(level == 8)
+    col=4;
+    init_Card(col,row);
+    display = 4;
+    
+  }
+  else if(level == 8)
   {
     col=4;
     row=4;
+    init_Card(col,row);
+    display = 5;
+  }  
+}
+
+void init_Card(int col, int row){ 
+  int [][] status = new int [row][col];
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
         println(i,j);
-      }
-      
-    }
-  }
-    
-  shuffCards(cards);
-
-
+        status[i][j] =0;
+      }  
+    } 
 }
