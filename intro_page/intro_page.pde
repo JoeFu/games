@@ -84,7 +84,6 @@ void draw() {
     {
       for (int j =0; j<col;j++)
       {
-        //Draw Here !!!!!!!!
         if (card_status[i][j]== 0)
         {
           fill(0,80,60);
