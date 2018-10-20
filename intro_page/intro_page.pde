@@ -27,6 +27,12 @@ int row;
 int col;
 int [] crad_show;
 
+int [] cards_numbers3= {1,1,2,2,3,3};
+int [] cards_numbers6={1,1,2,2,3,3,4,4,5,5,6,6};
+int [] cards_numbers8={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
+
+
+
 void setup(){
   size(800,600);
   img1 = loadImage("background.jpg");
@@ -69,7 +75,7 @@ void draw() {
     image(img3,width/4,0, width, height);
     row=2;
     col=3;
-    if (card_status.length < row)
+    if (card_status.length != row)
     {
       card_status = new int [row][col];
       crad_show = new int [row*col];
@@ -84,14 +90,16 @@ void draw() {
           fill(0,80,60);
           rectMode(CORNER);
           rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
-          println("Display =3",card_status[i][j]);
+          //println("Display =3",card_status[i][j]);
         }
         else if(card_status[i][j]==1)
         {
-          fill(255,255,255);
-          rectMode(CORNER);
-          rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
-          println("Display =3",card_status[i][j]); 
+          //fill(255,255,255);
+          rectMode(CENTER);
+          int number=(i*col)+j;
+          //println(number);
+          image(tiles[cards_numbers3[number]-1],3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
+          //println("Display =3",card_status[i][j]); 
         }
         else if (card_status[i][j]==2)
         {
@@ -100,17 +108,17 @@ void draw() {
         //println(i,j);
       }
     }
+  }
     
-   }
-    
-    //Display = 4, Level is Medium
-    else if (display==4) {
+  //Display = 4, Level is Medium
+  else if (display==4) {
     row=3;
     col=4;
     image(img3,width/4,0, width, height);
-    if (card_status.length < row)
+    if (card_status.length != row)
     {
       card_status = new int [row][col];
+      crad_show = new int [row*col];
     }
     for (int i =0; i<row;i++)
     {
@@ -124,29 +132,29 @@ void draw() {
         }
         else if (card_status[i][j]==1)
         {
-          fill(255,255,255);
-          rectMode(CORNER);
-          rect(23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
-          println(i,j);
+          rectMode(CENTER);
+          int number=(i*col)+j;
+          //println(number);
+          image(tiles[cards_numbers6[number]-1],23.0*width/80.0+j*3.0*width/16.0,height/15.0+height/3.0*i,9.0*width/80.0,height/5.0);
+          //println(i,j);
         }
         else if(card_status[i][j]==2)
         {
-          
         }
       }
     }
-   
-       
     //println ("Here is display= 4");
-    }
-    //Display = 4, Level is hard
-    else if (display==5) {
+  }
+  
+    //Display = 5, Level is hard
+  else if (display==5) {
     row=4;
     col=4;
     image(img3,width/4,0, width, height);
-    if (card_status.length < row)
+    if (card_status.length != row)
     {
       card_status = new int [row][col];
+      crad_show = new int [row*col];
     }
     for (int i =0; i<row;i++)
     {
@@ -157,23 +165,22 @@ void draw() {
           fill(0,80,60);
           rectMode(CORNER);
           rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
-          println(i,j);
+          //println(i,j);
         }
         else if (card_status[i][j]==1)
         {
-          fill(0,0,0);
-          rectMode(CORNER);
-          rect(23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
-          println(i,j);
+          int number=(i*col)+j;
+          //println(number);
+          image(tiles[cards_numbers8[number]-1],23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
+          //println(i,j);
         }
         else if (card_status[i][j]==2) {
           
         }
-         
       }
     }
     
-    println ("Here is display= 5");
+   // println ("Here is display= 5");
     }
 }
 
@@ -198,20 +205,21 @@ void mouseClicked(){
   if(display==2||display==3||display==4||display==5){
      if(overeasy()==true){
       level=3;
-      int [] cards_numbers= {1,1,2,2,3,3};
-      StartGame(level,cards_numbers);
+      //int [] cards_numbers= {1,1,2,2,3,3};
+      StartGame(level,cards_numbers3);
+      printArray(cards_numbers3);
       }
       else if(overmedium()==true)
       {
       level=6;
-      int [] cards_numbers={1,1,2,2,3,3,4,4,5,5,6,6};
-      StartGame(level,cards_numbers);
+      StartGame(level,cards_numbers6);
+      printArray(cards_numbers6);
       }
       // Hard
       else if(overhard()==true){
       level=8;
-      int [] cards_numbers={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
-      StartGame(level,cards_numbers);
+      StartGame(level,cards_numbers8);
+      printArray(cards_numbers8);
       }
       else if(overend()==true){
       display =0;
@@ -229,25 +237,25 @@ void mouseClicked(){
         }
       }
       // Change Here!
-      if(level==4){
+      if(level==6){
       for (int i =0; i<row;i++)
       {
         for (int j =0; j<col;j++)
         {
-          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+          if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/15.0+height/3.0*i+height/5.0&& mouseY>height/15.0+height/3.0*i){
             println("walaaaaa");
             card_status[i][j]=1;
-            }
           }
-        }
-      } 
+         }
+       }
+     } 
       // Change Here!
-      if(level==5){
+      if(level==8){
       for (int i =0; i<row;i++)
       {
         for (int j =0; j<col;j++)
         {
-          if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
+          if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
             println("walaaaaa");
             card_status[i][j]=1;
             }
