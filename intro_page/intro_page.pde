@@ -401,7 +401,7 @@ void init_Card(int col, int row){
 
 void is_distory_card()
 {
-  if(cardsturned == 3){
+  if(cardsturned == 2){
     if(card1!=card2){
       card1=0;
       card2=0;
