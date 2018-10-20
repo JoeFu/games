@@ -31,7 +31,9 @@ int [] cards_numbers3= {1,1,2,2,3,3};
 int [] cards_numbers6={1,1,2,2,3,3,4,4,5,5,6,6};
 int [] cards_numbers8={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
 
-
+int cardsturned=0;
+int card1;
+int card2;
 
 void setup(){
   size(800,600);
@@ -49,7 +51,6 @@ void setup(){
 }
 
 void draw() { 
-  
   //Display = 0, Introduction Page
   if(display==0){
     clear();
@@ -206,18 +207,27 @@ void mouseClicked(){
       level=3;
       //int [] cards_numbers= {1,1,2,2,3,3};
       StartGame(level,cards_numbers3);
+      cardsturned=0;
+      card1=0;
+      card2=0;
       printArray(cards_numbers3);
       }
       else if(overmedium()==true)
       {
       level=6;
       StartGame(level,cards_numbers6);
+      cardsturned=0;
+      card1=0;
+      card2=0;
       printArray(cards_numbers6);
       }
       // Hard
       else if(overhard()==true){
       level=8;
       StartGame(level,cards_numbers8);
+      cardsturned=0;
+      card1=0;
+      card2=0;
       printArray(cards_numbers8);
       }
       else if(overend()==true){
@@ -231,6 +241,19 @@ void mouseClicked(){
           if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
             println("walaaaaa");
             card_status[i][j]=1;
+            cardsturned=cardsturned+1;
+            println(cardsturned);
+            if(cardsturned==1){
+              int number=(i*col)+j;
+              //println(number);
+              card1=cards_numbers3[number];
+              println("first"+card1);
+            }else if(cardsturned==2){
+              int number=(i*col)+j;
+              //println(number);
+              card2=cards_numbers3[number];
+              println("second"+card2);
+            }
             }
           }
         }
@@ -244,25 +267,83 @@ void mouseClicked(){
           if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/15.0+height/3.0*i+height/5.0&& mouseY>height/15.0+height/3.0*i){
             println("walaaaaa");
             card_status[i][j]=1;
+            cardsturned=cardsturned+1;
+            println(cardsturned);
+            if(cardsturned==1){
+              int number=(i*col)+j;
+              //println(number);
+              card1=cards_numbers6[number];
+              println("first"+card1);
+            }else if(cardsturned==2){
+              int number=(i*col)+j;
+              //println(number);
+              card2=cards_numbers6[number];
+              println("second"+card2);
+            }
           }
          }
        }
      } 
       // Change Here!
       if(level==8){
-      for (int i =0; i<row;i++)
-      {
-        for (int j =0; j<col;j++)
+        row=4;
+        col=4;
+        for (int i =0; i<row;i++)
         {
-          if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
-            println("walaaaaa");
-            card_status[i][j]=1;
+          for (int j =0; j<col;j++)
+          {
+            if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
+              println("walaaaaa");
+              card_status[i][j]=1;
+              cardsturned=cardsturned+1;
+              println(cardsturned);
+              if(cardsturned==1){
+                int number=(i*col)+j;
+                //println(number);
+                card1=cards_numbers8[number];
+                println("first"+card1);
+              }else if(cardsturned==2){
+                int number=(i*col)+j;
+                //println(number);
+                card2=cards_numbers8[number];
+                println("second"+card2);
+              }
             }
           }
         }
-      } 
+      }
+      if(cardsturned==2){
+        if(card1!=card2){
+          card1=0;
+          card2=0;
+          for (int i =0; i<row;i++)
+          {
+            for (int j =0; j<col;j++)
+            {
+              if(card_status[i][j]==1){
+                card_status[i][j]=0;
+                cardsturned=0;
+              }
+            }
+          }
+        }else if(card1==card2){
+          card1=0;
+          card2=0;
+          for (int i =0; i<row;i++)
+          {
+            for (int j =0; j<col;j++)
+            {
+              if(card_status[i][j]==1){
+                card_status[i][j]=2;
+                cardsturned=0;
+              }
+            }
+          }
+        }
+      }
+    }
   }
-}
+
 
 // Define side page
 void side_page(){  
