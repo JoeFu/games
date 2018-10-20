@@ -50,6 +50,7 @@ void setup(){
 }
 
 void draw() { 
+  frameRate(5);
   //Display = 0, Introduction Page
   if(display==0){
     clear();
@@ -139,7 +140,7 @@ void draw() {
         {
         }
       }
-    }
+    }is_distory_card();
   }
   
   //Display = 5, Level is hard
@@ -173,7 +174,7 @@ void draw() {
         }
       }
      }
-    }
+    }is_distory_card();
 }
 
 
