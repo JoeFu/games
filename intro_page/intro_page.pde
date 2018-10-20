@@ -238,20 +238,22 @@ void mouseClicked(){
         for (int j =0; j<col;j++)
         {
           if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
-            println("Level =3");
-            card_status[i][j]=1;
-            cardsturned=cardsturned+1;
-            println(cardsturned);
-            if(cardsturned==1){
-              int number=(i*col)+j;
-              //println(number);
-              card1=cards_numbers3[number];
-              println("first"+card1);
-            }else if(cardsturned==2){
-              int number=(i*col)+j;
-              //println(number);
-              card2=cards_numbers3[number];
-              println("second"+card2);
+            if(card_status[i][j]==0){
+              println("Level =3");
+              card_status[i][j]=1;
+              cardsturned=cardsturned+1;
+              println(cardsturned);
+              if(cardsturned==1){
+                int number=(i*col)+j;
+                //println(number);
+                card1=cards_numbers3[number];
+                println("first"+card1);
+              }else if(cardsturned==2){
+                int number=(i*col)+j;
+                //println(number);
+                card2=cards_numbers3[number];
+                println("second"+card2);
+              }
             }
             }
           }
@@ -264,20 +266,22 @@ void mouseClicked(){
         for (int j =0; j<col;j++)
         {
           if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/15.0+height/3.0*i+height/5.0&& mouseY>height/15.0+height/3.0*i){
-            println("Level 6");
-            card_status[i][j]=1;
-            cardsturned=cardsturned+1;
-            println(cardsturned);
-            if(cardsturned==1){
-              int number=(i*col)+j;
-              //println(number);
-              card1=cards_numbers6[number];
-              println("first"+card1);
-            }else if(cardsturned==2){
-              int number=(i*col)+j;
-              //println(number);
-              card2=cards_numbers6[number];
-              println("second"+card2);
+            if(card_status[i][j]==0){
+              println("Level 6");
+              card_status[i][j]=1;
+              cardsturned=cardsturned+1;
+              println(cardsturned);
+              if(cardsturned==1){
+                int number=(i*col)+j;
+                //println(number);
+                card1=cards_numbers6[number];
+                println("first"+card1);
+              }else if(cardsturned==2){
+                int number=(i*col)+j;
+                //println(number);
+                card2=cards_numbers6[number];
+                println("second"+card2);
+              }
             }
           }
          }
@@ -291,20 +295,22 @@ void mouseClicked(){
           for (int j =0; j<col;j++)
           {
             if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
-              println("Level 8");
-              card_status[i][j]=1;
-              cardsturned=cardsturned+1;
-              println(cardsturned);
-              if(cardsturned==1){
-                int number=(i*col)+j;
-                //println(number);
-                card1=cards_numbers8[number];
-                println("first"+card1);
-              }else if(cardsturned==2){
-                int number=(i*col)+j;
-                //println(number);
-                card2=cards_numbers8[number];
-                println("second"+card2);
+              if(card_status[i][j]==0){
+                println("Level 8");
+                card_status[i][j]=1;
+                cardsturned=cardsturned+1;
+                println(cardsturned);
+                if(cardsturned==1){
+                  int number=(i*col)+j;
+                  //println(number);
+                  card1=cards_numbers8[number];
+                  println("first"+card1);
+                }else if(cardsturned==2){
+                  int number=(i*col)+j;
+                  //println(number);
+                  card2=cards_numbers8[number];
+                  println("second"+card2);
+                }
               }
             }
           }
