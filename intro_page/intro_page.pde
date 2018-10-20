@@ -31,7 +31,7 @@ int [] cards_numbers3= {1,1,2,2,3,3};
 int [] cards_numbers6={1,1,2,2,3,3,4,4,5,5,6,6};
 int [] cards_numbers8={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
 
-int cardsturned=0;
+int cardsturned;
 int card1;
 int card2;
 
@@ -205,7 +205,6 @@ void mouseClicked(){
   if(display==2||display==3||display==4||display==5){
      if(overeasy()==true){
       level=3;
-      //int [] cards_numbers= {1,1,2,2,3,3};
       StartGame(level,cards_numbers3);
       cardsturned=0;
       card1=0;
@@ -239,7 +238,7 @@ void mouseClicked(){
         for (int j =0; j<col;j++)
         {
           if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
-            println("walaaaaa");
+            println("Level =3");
             card_status[i][j]=1;
             cardsturned=cardsturned+1;
             println(cardsturned);
@@ -258,14 +257,14 @@ void mouseClicked(){
           }
         }
       }
-      // Change Here!
+      
       if(level==6){
       for (int i =0; i<row;i++)
       {
         for (int j =0; j<col;j++)
         {
           if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/15.0+height/3.0*i+height/5.0&& mouseY>height/15.0+height/3.0*i){
-            println("walaaaaa");
+            println("Level 6");
             card_status[i][j]=1;
             cardsturned=cardsturned+1;
             println(cardsturned);
@@ -284,8 +283,7 @@ void mouseClicked(){
          }
        }
      } 
-      // Change Here!
-      if(level==8){
+     if(level==8){
         row=4;
         col=4;
         for (int i =0; i<row;i++)
@@ -293,7 +291,7 @@ void mouseClicked(){
           for (int j =0; j<col;j++)
           {
             if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
-              println("walaaaaa");
+              println("Level 8");
               card_status[i][j]=1;
               cardsturned=cardsturned+1;
               println(cardsturned);
@@ -312,7 +310,8 @@ void mouseClicked(){
           }
         }
       }
-      if(cardsturned==2){
+      // CHANGE TO 3
+      if(cardsturned==3){
         if(card1!=card2){
           card1=0;
           card2=0;
@@ -363,6 +362,7 @@ void StartGame (int level,int []cards){
   totaltiles=level*2;
   shuffCards(cards);
   if(level == 3){
+    println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 3;
     card_status = new int [row][col];
@@ -379,13 +379,9 @@ void StartGame (int level,int []cards){
     
   }
   else if(level == 6){
-    //row=3;
-    //col=4;
+    println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 4;
-    card_status = new int [row][col];
-    
-    //Change here
     for (int i =0; i<row;i++)
       {
         for (int j =0; j<col;j++)
@@ -397,14 +393,11 @@ void StartGame (int level,int []cards){
         }
       }
   }
-  else if(level == 8)
-  {
-    //col=4;
-    //row=4;
+  else if(level == 8){
+    println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 5;
     card_status = new int [row][col];
-    //Change here
     for (int i =0; i<row;i++)
       {
         for (int j =0; j<col;j++)
