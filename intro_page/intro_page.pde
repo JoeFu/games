@@ -25,7 +25,6 @@ float buttonY_move;
 
 int row;
 int col;
-int [] crad_show;
 
 int [] cards_numbers3= {1,1,2,2,3,3};
 int [] cards_numbers6={1,1,2,2,3,3,4,4,5,5,6,6};
@@ -71,6 +70,8 @@ void draw() {
     image(img3,width/4,0, width, height);
     side_page(); 
   } 
+
+
   //Display = 3, Level is Easy
   else if (display==3) {
     image(img3,width/4,0, width, height);
@@ -79,35 +80,32 @@ void draw() {
     if (card_status.length != row)
     {
       card_status = new int [row][col];
-      crad_show = new int [row*col];
     }
     for (int i =0; i<row;i++)
     {
       for (int j =0; j<col;j++)
       {
+        
+        // 卡片状态是0 ，背面； 状态为1； 正面；状态为2，消失 切无法反转回来
         if (card_status[i][j]== 0)
         {
           fill(0,80,60);
           rectMode(CORNER);
           rect(3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
-          //println("Display =3",card_status[i][j]);
         }
         else if(card_status[i][j]==1)
         {
-          //fill(255,255,255);
           rectMode(CENTER);
           int number=(i*col)+j;
-          //println(number);
           image(tiles[cards_numbers3[number]-1],3.0*width/10.0+j*width/4.0,7.0*height/60.0+height*0.5*i,3.0*width/20.0,4.0*height/15.0);
-          //println("Display =3",card_status[i][j]); 
         }
         else if (card_status[i][j]==2)
         {
           
         }
-        //println(i,j);
       }
     }
+    is_distory_card();
   }
     
   //Display = 4, Level is Medium
@@ -118,7 +116,6 @@ void draw() {
     if (card_status.length != row)
     {
       card_status = new int [row][col];
-      crad_show = new int [row*col];
     }
     for (int i =0; i<row;i++)
     {
@@ -143,10 +140,9 @@ void draw() {
         }
       }
     }
-    //println ("Here is display= 4");
   }
   
-    //Display = 5, Level is hard
+  //Display = 5, Level is hard
   else if (display==5) {
     row=4;
     col=4;
@@ -154,7 +150,6 @@ void draw() {
     if (card_status.length != row)
     {
       card_status = new int [row][col];
-      crad_show = new int [row*col];
     }
     for (int i =0; i<row;i++)
     {
@@ -170,7 +165,6 @@ void draw() {
         else if (card_status[i][j]==1)
         {
           int number=(i*col)+j;
-          //println(number);
           image(tiles[cards_numbers8[number]-1],23.0*width/80.0+j*3.0*width/16.0,height/40.0+height/4.0*i,9.0*width/80.0,height/5.0);
           //println(i,j);
         }
@@ -178,9 +172,7 @@ void draw() {
           
         }
       }
-    }
-    
-   // println ("Here is display= 5");
+     }
     }
 }
 
@@ -203,8 +195,10 @@ void mouseClicked(){
   }
   //clicks on display 2
   if(display==2||display==3||display==4||display==5){
+      //Easy -> Display =2 
      if(overeasy()==true){
       level=3;
+      //开始游戏，赋值 等级和 卡序列
       StartGame(level,cards_numbers3);
       cardsturned=0;
       card1=0;
@@ -241,18 +235,22 @@ void mouseClicked(){
             if(card_status[i][j]==0){
               println("Level =3");
               card_status[i][j]=1;
-              cardsturned=cardsturned+1;
-              println(cardsturned);
-              if(cardsturned==1){
+              cardsturned = cardsturned + 1;
+              println("cardsturned:",cardsturned);
+              if(cardsturned == 1){
+                // 2D Array to  1D Array
                 int number=(i*col)+j;
-                //println(number);
-                card1=cards_numbers3[number];
+                card1 = cards_numbers3[number];
                 println("first"+card1);
-              }else if(cardsturned==2){
+              }else if(cardsturned == 2){
                 int number=(i*col)+j;
                 //println(number);
-                card2=cards_numbers3[number];
+                card2 = cards_numbers3[number];
                 println("second"+card2);
+              }
+              else if (cardsturned == 3)
+              {
+                  
               }
             }
             }
@@ -316,36 +314,9 @@ void mouseClicked(){
           }
         }
       }
-      // CHANGE TO 3
-      if(cardsturned==3){
-        if(card1!=card2){
-          card1=0;
-          card2=0;
-          for (int i =0; i<row;i++)
-          {
-            for (int j =0; j<col;j++)
-            {
-              if(card_status[i][j]==1){
-                card_status[i][j]=0;
-                cardsturned=0;
-              }
-            }
-          }
-        }else if(card1==card2){
-          card1=0;
-          card2=0;
-          for (int i =0; i<row;i++)
-          {
-            for (int j =0; j<col;j++)
-            {
-              if(card_status[i][j]==1){
-                card_status[i][j]=2;
-                cardsturned=0;
-              }
-            }
-          }
-        }
-      }
+      //Display 
+      // is_distory_card();
+      
     }
   }
 
@@ -377,7 +348,6 @@ void StartGame (int level,int []cards){
         for (int j =0; j<col;j++)
         {
           if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
-            //println("walaaaaa");
             card_status[i][j]=1;
           }
         }
@@ -414,7 +384,9 @@ void StartGame (int level,int []cards){
           }
         }
       }
-  }  
+  } 
+  
+  
 }
 
 void init_Card(int col, int row){ 
@@ -422,8 +394,40 @@ void init_Card(int col, int row){
     {
       for (int j =0; j<col;j++)
       {
-        //println(i,j);
         card_status[i][j] =0;
       }  
     } 
+}
+
+void is_distory_card()
+{
+  if(cardsturned == 3){
+    if(card1!=card2){
+      card1=0;
+      card2=0;
+      for (int i =0; i<row;i++)
+        {
+          for (int j =0; j<col;j++)
+            {
+              if(card_status[i][j]==1){
+                card_status[i][j]=0;
+                cardsturned=0;
+              }
+            }
+          }
+    }else if(card1==card2){
+          card1=0;
+          card2=0;
+          for (int i =0; i<row;i++)
+            {
+              for (int j =0; j<col;j++)
+              {
+                if(card_status[i][j]==1){
+                  card_status[i][j]=2;
+                  cardsturned=0;
+                }
+              }
+            }
+      }
+  }
 }
