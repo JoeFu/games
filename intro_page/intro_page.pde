@@ -33,6 +33,7 @@ int [] cards_numbers8={1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8};
 int cardsturned;
 int card1;
 int card2;
+int totalcount;
 
 void setup(){
   size(800,600);
@@ -202,27 +203,30 @@ void mouseClicked(){
       //开始游戏，赋值 等级和 卡序列
       StartGame(level,cards_numbers3);
       cardsturned=0;
+      totalcount=0;
       card1=0;
       card2=0;
-      printArray(cards_numbers3);
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////printArray(cards_numbers3);
       }
       else if(overmedium()==true)
       {
       level=6;
       StartGame(level,cards_numbers6);
       cardsturned=0;
+      totalcount=0;
       card1=0;
       card2=0;
-      printArray(cards_numbers6);
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////printArray(cards_numbers6);
       }
       // Hard
       else if(overhard()==true){
       level=8;
       StartGame(level,cards_numbers8);
       cardsturned=0;
+      totalcount=0;
       card1=0;
       card2=0;
-      printArray(cards_numbers8);
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////////printArray(cards_numbers8);
       }
       else if(overend()==true){
       display =0;
@@ -234,20 +238,22 @@ void mouseClicked(){
         {
           if(mouseX<3.0*width/10.0+j*width/4.0+3.0*width/20.0&&mouseX>3.0*width/10.0+j*width/4.0&& mouseY<7.0*height/60.0+height*0.5*i+4.0*height/15.0&& mouseY>7.0*height/60.0+height*0.5*i){
             if(card_status[i][j]==0){
-              println("Level =3");
+              //println("Level =3");
               card_status[i][j]=1;
               cardsturned = cardsturned + 1;
-              println("cardsturned:",cardsturned);
+              totalcount=totalcount+1;
+              println("total steps taken: "+totalcount);
+              //println("cardsturned:",cardsturned);
               if(cardsturned == 1){
                 // 2D Array to  1D Array
                 int number=(i*col)+j;
                 card1 = cards_numbers3[number];
-                println("first"+card1);
+                //println("first"+card1);
               }else if(cardsturned == 2){
                 int number=(i*col)+j;
                 //println(number);
                 card2 = cards_numbers3[number];
-                println("second"+card2);
+                //println("second"+card2);
               }
               else if (cardsturned == 3)
               {
@@ -266,20 +272,22 @@ void mouseClicked(){
         {
           if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/15.0+height/3.0*i+height/5.0&& mouseY>height/15.0+height/3.0*i){
             if(card_status[i][j]==0){
-              println("Level 6");
+              //println("Level 6");
               card_status[i][j]=1;
               cardsturned=cardsturned+1;
-              println(cardsturned);
+              totalcount=totalcount+1;
+              println("total steps taken: "+totalcount);
+              //println(cardsturned);
               if(cardsturned==1){
                 int number=(i*col)+j;
                 //println(number);
                 card1=cards_numbers6[number];
-                println("first"+card1);
+                //println("first"+card1);
               }else if(cardsturned==2){
                 int number=(i*col)+j;
                 //println(number);
                 card2=cards_numbers6[number];
-                println("second"+card2);
+                //println("second"+card2);
               }
             }
           }
@@ -295,20 +303,22 @@ void mouseClicked(){
           {
             if(mouseX<23.0*width/80.0+j*3.0*width/16.0+9.0*width/80.0&&mouseX>23.0*width/80.0+j*3.0*width/16.0&& mouseY<height/40.0+height/4.0*i+height/5.0&& mouseY>height/40.0+height/4.0*i){
               if(card_status[i][j]==0){
-                println("Level 8");
+                //println("Level 8");
                 card_status[i][j]=1;
                 cardsturned=cardsturned+1;
-                println(cardsturned);
+                totalcount=totalcount+1;
+                println("total steps taken: "+totalcount);
+                //println(cardsturned);
                 if(cardsturned==1){
                   int number=(i*col)+j;
                   //println(number);
                   card1=cards_numbers8[number];
-                  println("first"+card1);
+                  //println("first"+card1);
                 }else if(cardsturned==2){
                   int number=(i*col)+j;
                   //println(number);
                   card2=cards_numbers8[number];
-                  println("second"+card2);
+                  //println("second"+card2);
                 }
               }
             }
@@ -340,7 +350,7 @@ void StartGame (int level,int []cards){
   totaltiles=level*2;
   shuffCards(cards);
   if(level == 3){
-    println("Current Row",row,"Current Col",col);
+    //println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 3;
     card_status = new int [row][col];
@@ -356,7 +366,7 @@ void StartGame (int level,int []cards){
     
   }
   else if(level == 6){
-    println("Current Row",row,"Current Col",col);
+    //println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 4;
     for (int i =0; i<row;i++)
@@ -371,7 +381,7 @@ void StartGame (int level,int []cards){
       }
   }
   else if(level == 8){
-    println("Current Row",row,"Current Col",col);
+    //println("Current Row",row,"Current Col",col);
     init_Card(col,row);
     display = 5;
     card_status = new int [row][col];
